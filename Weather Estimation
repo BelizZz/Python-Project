@@ -11,7 +11,7 @@ def EsMovingAvg(dataframe, name, windowsize, sizeestimate):
     newvalues = []
     copyframe = dataframe[[name]]
     for index in range(sizeestimate): 
-        value = copyframe[name].rolling(windowsize).mean().iloc[-4]
+        value = copyframe[name].rolling(windowsize).mean().iloc[-1]
         value = round(value,4) 
         newvalues.append(value)
         size = len(copyframe)       
