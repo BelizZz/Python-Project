@@ -1,4 +1,4 @@
-year;totalconsumption;TotalResidentialSubscriber;TotalNon-ResidentialSubscriber;population;weather;housholdprice;nonhousholdprice
+Year;TotalConsumption;TotalResidentialSubscriber;TotalNon-ResidentialSubscriber;Population;Weather;HouseholdPrice;NonHouseholdPrice
 2010;37411118370;6512009;342737;73722988;11.90194;0.0657;0.05715
 2011;44145580829;7475046;393423;74724269;11.94349;0.0681;0.05695
 2012;45241762899;8713043;358581;75627384;13.31957;0.0840;0.05865
