@@ -1,6 +1,6 @@
 # BA4318 - Final Project 
 # Turkey's Natural Gas Demand Estimation for 2019
-# Beril ERMAN - Oğuzhan EVLİ - Mervenur SAĞLIK - Beliz ZIYPAK
+# Beril ARMAGAN - Oğuzhan EVLİ - Mervenur SAĞLIK - Beliz ZIYPAK
 
 import pandas as pd 
 import numpy as np
