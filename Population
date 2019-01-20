@@ -49,7 +49,7 @@ def EsHoltWin(dataframe, name, number_seasons, sizeestimate):
 import warnings
 warnings.filterwarnings("ignore")
 
-df = pd.read_csv("nufus.txt", sep=';' , engine="python")
+df = pd.read_csv("population.txt", sep=';' , engine="python")
 size = len(df)
 
 testsize = 4
@@ -101,7 +101,7 @@ errors = [ma_rms, ses_rms, holt_rms, hw_rms]
 min_err = min(errors)
 
 
-print("For best method.")
+print("For Population:")
 
 if ma_rms == min_err:
     print("Best method for test data is Moving Average.")
