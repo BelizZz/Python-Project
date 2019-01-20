@@ -107,27 +107,27 @@ if ma_rms == min_err:
     print("Best method for test data is Moving Average.")
     ma_estimates = EsMovingAvg(dataframe=df, name='NÜFUS', windowsize=2, sizeestimate=4)
     
-    print("MA estimate for November 2018:", ma_estimates[-1])
+    print("MA estimate for Population 2018:", ma_estimates[-1])
 elif ses_rms == min_err:
    
     print("Best method for test data is Simple Exponential Smoothing.")
     ses_alpha = best_alpha
     ses_estimates= EsExponSmooth(dataframe=df, name='NÜFUS', alpha=ses_alpha, sizeestimate=4)
     
-    print("SES Estimate for November 2018: ", ses_estimates[-1])
+    print("SES Estimate for Population 2018: ", ses_estimates[-1])
 elif hw_rms == min_err:
     
     print("Best method for test data is Holt-Winters.")
     hw_seasons = 2
     hw_estimates = EsHoltWin(dataframe=df, name='NÜFUS', number_seasons=hw_seasons, sizeestimate=4)
     
-    print("HW Estimate for November 2018:", hw_estimates[-1])
+    print("HW Estimate for Population 2018:", hw_estimates[-1])
 elif holt_rms == min_err:
     
     print("Best method for test data is Holt.")
     holt_estimates= EsHolt(dataframe=df, name='NÜFUS', alpha=best_holtalpha, slope=best_holtslope, sizeestimate=4)
     
-    print("Holt Estimate for November 2018:", holt_estimates[-1])
+    print("Holt Estimate for Population 2018:", holt_estimates[-1])
 
 
 
