@@ -49,7 +49,7 @@ def EsHoltWin(dataframe, name, number_seasons, sizeestimate):
 import warnings
 warnings.filterwarnings("ignore")
 
-df = pd.read_csv("abone_sayısı.txt", sep=';' , engine="python")
+df = pd.read_csv("subscriber.txt", sep=';' , engine="python")
 size = len(df)
 
 testsize = 4
