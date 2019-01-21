@@ -123,5 +123,5 @@ elif holt_rms == min_err:
     #print("Best method for test data is Holt.")
     holt_estimates= EsHolt(dataframe=df, name='TotalResidentialSubscriber', alpha=best_holtalpha, slope=best_holtslope, sizeestimate=4)
     trs = holt_estimates[-1]
-    print("Holt Estimate for Total Residential Subscriber 2018:", holt_estimates[-1])
+    #print("Holt Estimate for Total Residential Subscriber 2018:", holt_estimates[-1])
 
