@@ -56,10 +56,10 @@ testsize = 4
 trainsize = size - testsize
 train = df[(size - testsize) - trainsize : (size - testsize) - 1]
 test = df[size - testsize:]
-testarray = np.asarray(test['TotalNon-ResidentialSubscriber'])
+testarray = np.asarray(test['TotalNonResidentialSubscriber'])
 
  
-ma_estimates = EsMovingAvg(dataframe=train, name='TotalNon-ResidentialSubscriber', windowsize=2, sizeestimate=4)
+ma_estimates = EsMovingAvg(dataframe=train, name='TotalNonResidentialSubscriber', windowsize=2, sizeestimate=4)
 ma_rms = calculateerror(testarray,ma_estimates)
 
 
@@ -68,7 +68,7 @@ best_alpha = 0
 best_err = 1000000.0
 best_estimates = []
 for my_alpha in ses_alphas:
-    new_estimates= EsExponSmooth(dataframe=train, name='TotalNon-ResidentialSubscriber', alpha=my_alpha, sizeestimate=4)
+    new_estimates= EsExponSmooth(dataframe=train, name='TotalNonResidentialSubscriber', alpha=my_alpha, sizeestimate=4)
     new_rms = calculateerror(testarray, new_estimates)
     if new_rms < best_err:
         best_err = new_rms
@@ -84,7 +84,7 @@ best_holterr= 1000000
 for my_alpha in holt_alphas:
     holt_slopes = np.linspace(0.68, 1.0, 4)
     for my_slope in holt_slopes:
-        new_estimates= EsHolt(dataframe=train, name='TotalNon-ResidentialSubscriber', alpha=my_alpha, slope=my_slope, sizeestimate=4)
+        new_estimates= EsHolt(dataframe=train, name='TotalNonResidentialSubscriber', alpha=my_alpha, slope=my_slope, sizeestimate=4)
         new_rms = calculateerror(testarray, new_estimates)
         if new_rms < best_holterr:
             best_holterr = new_rms
@@ -93,7 +93,7 @@ for my_alpha in holt_alphas:
 holt_rms = best_holterr
 
 hw_seasons = 2
-hw_estimates = EsHoltWin(dataframe=train, name='TotalNon-ResidentialSubscriber', number_seasons=hw_seasons,sizeestimate=4)
+hw_estimates = EsHoltWin(dataframe=train, name='TotalNonResidentialSubscriber', number_seasons=hw_seasons,sizeestimate=4)
 hw_rms = calculateerror(testarray, hw_estimates)
 
 
@@ -105,24 +105,24 @@ min_err = min(errors)
 
 if ma_rms == min_err:
     #print("Best method for test data is Moving Average.")
-    ma_estimates = EsMovingAvg(dataframe=df, name='TotalNon-ResidentialSubscriber', windowsize=2, sizeestimate=4)
+    ma_estimates = EsMovingAvg(dataframe=df, name='TotalNonResidentialSubscriber', windowsize=2, sizeestimate=4)
     tnrs = ma_estimates[-1]
     #print("MA estimate for November 2018:", ma_estimates[-1])
 elif ses_rms == min_err:
     #print("Best method for test data is Simple Exponential Smoothing.")
     ses_alpha = best_alpha
-    ses_estimates= EsExponSmooth(dataframe=df, name='TotalNon-ResidentialSubscriber', alpha=ses_alpha, sizeestimate=4)
+    ses_estimates= EsExponSmooth(dataframe=df, name='TotalNonResidentialSubscriber', alpha=ses_alpha, sizeestimate=4)
     tnrs = ses_estimates[-1]
     #print("SES Estimate for November 2018: ", ses_estimates[-1])  
 elif hw_rms == min_err:
     #print("Best method for test data is Holt-Winters.")
     hw_seasons = 2
-    hw_estimates = EsHoltWin(dataframe=df, name='TotalNon-ResidentialSubscriber', number_seasons=hw_seasons, sizeestimate=4)
+    hw_estimates = EsHoltWin(dataframe=df, name='TotalNonResidentialSubscriber', number_seasons=hw_seasons, sizeestimate=4)
     tnrs = hw_estimates[-1]
     #print("HW Estimate for November 2018:", hw_estimates[-1])
 elif holt_rms == min_err:
     #print("Best method for test data is Holt.")
-    holt_estimates= EsHolt(dataframe=df, name='TotalNon-ResidentialSubscriber', alpha=best_holtalpha, slope=best_holtslope, sizeestimate=4)
+    holt_estimates= EsHolt(dataframe=df, name='TotalNonResidentialSubscriber', alpha=best_holtalpha, slope=best_holtslope, sizeestimate=4)
     tnrs = holt_estimates[-1]
     #print("Holt Estimate for November 2018:", holt_estimates[-1])
 
