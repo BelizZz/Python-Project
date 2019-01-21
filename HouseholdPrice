@@ -104,26 +104,26 @@ min_err = min(errors)
 
 if ma_rms == min_err:
     #print("Best method for test data is Moving Average.")
-    ma_estimates = EsMovingAvg(dataframe=df, name='AverageHousehold', windowsize=4, sizeestimate=4)
+    ma_estimates = EsMovingAvg(dataframe=df, name='household', windowsize=4, sizeestimate=4)
     hspr = ma_estimates[-1]
     #print("MA estimate for Average Household Price 2018:", ma_estimates[-1])
 elif ses_rms == min_err:
    
     #print("Best method for test data is Simple Exponential Smoothing.")
     ses_alpha = best_alpha
-    ses_estimates= EsExponSmooth(dataframe=df, name='AverageHousehold', alpha=ses_alpha, sizeestimate=4)
+    ses_estimates= EsExponSmooth(dataframe=df, name='householdprice', alpha=ses_alpha, sizeestimate=4)
     hspr = ses_estimates[-1]
     #print("SES Estimate for Average Household Price 2018: ", ses_estimates[-1])
 elif hw_rms == min_err:
     
     #print("Best method for test data is Holt-Winters.")
     hw_seasons = 4
-    hw_estimates = EsHoltWin(dataframe=df, name='AverageHousehold', number_seasons=hw_seasons, sizeestimate=4)
+    hw_estimates = EsHoltWin(dataframe=df, name='householdprice', number_seasons=hw_seasons, sizeestimate=4)
     hspr = hw_estimates[-1]
     #print("HW Estimate for Average Household Price 2018:", hw_estimates[-1])
 elif holt_rms == min_err:
     
     #print("Best method for test data is Holt.")
-    holt_estimates= EsHolt(dataframe=df, name='AverageHousehold', alpha=best_holtalpha, slope=best_holtslope, sizeestimate=4)
+    holt_estimates= EsHolt(dataframe=df, name='householdprice', alpha=best_holtalpha, slope=best_holtslope, sizeestimate=4)
     hspr = holt_estimates[-1]
     #print("Holt Estimate for Average Household Price 2018:", holt_estimates[-1])
