@@ -101,32 +101,32 @@ errors = [ma_rms, ses_rms, holt_rms, hw_rms]
 min_err = min(errors)
 
 
-print("For best method.")
+#print("Weather:")
 
 if ma_rms == min_err:
-    print("Best method for test data is Moving Average.")
+    #print("Best method for test data is Moving Average.")
     ma_estimates = EsMovingAvg(dataframe=df, name='Average', windowsize=2, sizeestimate=4)
-    
-    print("MA estimate for Average Weather 2018:", ma_estimates[-4])
+    wth = ma_estimates[-1]
+    #print("MA estimate for Average Weather 2018:", ma_estimates[-4])
 elif ses_rms == min_err:
    
-    print("Best method for test data is Simple Exponential Smoothing.")
+    #print("Best method for test data is Simple Exponential Smoothing.")
     ses_alpha = best_alpha
     ses_estimates= EsExponSmooth(dataframe=df, name='Average', alpha=ses_alpha, sizeestimate=4)
-    
-    print("SES Estimate for Average Weather 2018: ", ses_estimates[-4])
+    wth = ses_estimates[-1]
+    #print("SES Estimate for Average Weather 2018: ", ses_estimates[-4])
 elif hw_rms == min_err:
     
-    print("Best method for test data is Holt-Winters.")
+    #print("Best method for test data is Holt-Winters.")
     hw_seasons = 2
     hw_estimates = EsHoltWin(dataframe=df, name='Average', number_seasons=hw_seasons, sizeestimate=4)
-    
-    print("HW Estimate for Average Weather 2018:", hw_estimates[-4])
+    wth = hw_estimates[-1]
+    #print("HW Estimate for Average Weather 2018:", hw_estimates[-4])
 elif holt_rms == min_err:
     
-    print("Best method for test data is Holt.")
+    #print("Best method for test data is Holt.")
     holt_estimates= EsHolt(dataframe=df, name='Average', alpha=best_holtalpha, slope=best_holtslope, sizeestimate=4)
+    wth = holt_estimates[-1]
+    #print("Holt Estimate for Average Weather 2018:", holt_estimates[-4])
     
-    print("Holt Estimate for Average Weather 2018:", holt_estimates[-4])
-
 
