@@ -1,3 +1,27 @@
 # BA4318 - Final Project 
-# Turkey's Natural Gas Demand Estimation for 2018
+# Turkey's Natural Gas Consumption Estimation for 2018
 # Beril ARMAGAN - Oğuzhan EVLİ - Mervenur SAĞLIK - Beliz ZIYPAK
+
+import pandas as pd
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+from Population import pop
+from ResidentialSubscriber import trs
+from NonResidentialSubscriber import tnrs
+from HouseholdPrice import hspr
+from NonHouseholdPrice import nhspr
+
+print("Estimates for 2018 are:","\n","Population:",pop,"\n","Total Residential Subscriber:",trs,"\n","Total Non-Residential Subscriber:",tnrs,"\n","Average Household Price:",hspr,"\n","Average Non-Household Price:",nhspr)
+
+df = pd.read_csv("dataset.txt", sep=';')
+df2 = df[df.columns.difference(['Year'])]
+
+#print(df2.corr())
+
+model = ols("TotalConsumption ~ Population + TotalNonResidentialSubscriber + TotalResidentialSubscriber + householdprice + nonhouseholdprice", data=df2).fit()
+#print(model.params)
+#print(model.summary())
+
+forecast = (3.027e+11) - ((4191.1487)*pop) + ((1.092e+05)*tnrs) + ((4785.8256)*trs) + ((2.887e+11)*hspr) - ((7.683e+11)*nhspr)
+
+print("Natural gas consumption forecast for 2018 is", forecast)
