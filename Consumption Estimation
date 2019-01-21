@@ -24,4 +24,4 @@ model = ols("TotalConsumption ~ Population + TotalNonResidentialSubscriber + Tot
 
 forecast = (3.027e+11) - ((4191.1487)*pop) + ((1.092e+05)*tnrs) + ((4785.8256)*trs) + ((2.887e+11)*hspr) - ((7.683e+11)*nhspr)
 
-print("Natural gas consumption forecast for 2018 is", forecast)
+print("Natural gas consumption forecast for 2018 is", forecast, "Sm3.")
