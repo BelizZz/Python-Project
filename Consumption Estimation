@@ -10,18 +10,19 @@ from ResidentialSubscriber import trs
 from NonResidentialSubscriber import tnrs
 from HouseholdPrice import hspr
 from NonHouseholdPrice import nhspr
+from Weather import wth
 
-print("Estimates for 2018 are:","\n","Population:",pop,"\n","Total Residential Subscriber:",trs,"\n","Total Non-Residential Subscriber:",tnrs,"\n","Average Household Price:",hspr,"\n","Average Non-Household Price:",nhspr)
+print("Estimates for 2018 are:","\n","Population:",pop,"\n","Total Residential Subscriber:",trs,"\n","Total Non-Residential Subscriber:",tnrs,"\n","Average Household Price:",hspr,"\n","Average Non-Household Price:",nhspr,"\n","Average Weather:", wth)
 
 df = pd.read_csv("dataset.txt", sep=';')
 df2 = df[df.columns.difference(['Year'])]
 
 #print(df2.corr())
 
-model = ols("TotalConsumption ~ Population + TotalNonResidentialSubscriber + TotalResidentialSubscriber + householdprice + nonhouseholdprice", data=df2).fit()
+model = ols("TotalConsumption ~ Population + TotalNonResidentialSubscriber + TotalResidentialSubscriber + householdprice + nonhouseholdprice + weather", data=df2).fit()
 #print(model.params)
 #print(model.summary())
 
-forecast = (3.027e+11) - ((4191.1487)*pop) + ((1.092e+05)*tnrs) + ((4785.8256)*trs) + ((2.887e+11)*hspr) - ((7.683e+11)*nhspr)
+forecast = (4.206e+11) - ((5815.8028)*pop) + ((9.813e+04)*tnrs) + ((6849.2491)*trs) + ((2.305e+11)*hspr) - ((7.141e+11)*nhspr) - ((5.757e+08)*wth)
 
 print("Natural gas consumption forecast for 2018 is", forecast, "Sm3.")
