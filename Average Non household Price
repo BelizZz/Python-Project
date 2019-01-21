@@ -50,16 +50,16 @@ def EsHoltWin(dataframe, name, number_seasons, sizeestimate):
 import warnings
 warnings.filterwarnings("ignore")
 
-df = pd.read_csv("averageprice.txt", sep=';' , engine="python")
+df = pd.read_csv("dataset.txt", sep=';' , engine="python")
 size = len(df)
 
 testsize = 4
 trainsize = size - testsize
 train = df[(size - testsize) - trainsize : (size - testsize) - 1]
 test = df[size - testsize:]
-testarray = np.asarray(test['Average Nonhousehold'])
+testarray = np.asarray(test['nonhouseholdprice'])
 
-ma_estimates =EsMovingAvg(dataframe=train, name='Average Nonhousehold', windowsize=2, sizeestimate=4)
+ma_estimates =EsMovingAvg(dataframe=train, name='nonhouseholdprice', windowsize=2, sizeestimate=4)
 ma_rms = calculateerror(testarray,ma_estimates)
 
 
@@ -68,7 +68,7 @@ best_alpha = 0
 best_err = 1000000.0
 best_estimates = []
 for my_alpha in ses_alphas:
-    new_estimates= EsExponSmooth(dataframe=train, name='Average Nonhousehold', alpha=my_alpha, sizeestimate=4)
+    new_estimates= EsExponSmooth(dataframe=train, name='nonhouseholdprice', alpha=my_alpha, sizeestimate=4)
     new_rms = calculateerror(testarray, new_estimates)
     if new_rms < best_err:
         best_err = new_rms
@@ -84,7 +84,7 @@ best_holterr= 1000000
 for my_alpha in holt_alphas:
     holt_slopes = np.linspace(0.68, 1.0, 4)
     for my_slope in holt_slopes:
-        new_estimates= EsHolt(dataframe=train, name='Average Nonhousehold', alpha=my_alpha, slope=my_slope, sizeestimate=4)
+        new_estimates= EsHolt(dataframe=train, name='nonhouseholdprice', alpha=my_alpha, slope=my_slope, sizeestimate=4)
         new_rms = calculateerror(testarray, new_estimates)
         if new_rms < best_holterr:
             best_holterr = new_rms
@@ -93,13 +93,12 @@ for my_alpha in holt_alphas:
 holt_rms = best_holterr
 
 hw_seasons = 2
-hw_estimates = EsHoltWin(dataframe=train, name='Average Nonhousehold', number_seasons=hw_seasons, sizeestimate=4)
+hw_estimates = EsHoltWin(dataframe=train, name='nonhouseholdprice', number_seasons=hw_seasons, sizeestimate=4)
 hw_rms = calculateerror(testarray, hw_estimates)
 
 
 errors = [ma_rms, ses_rms, holt_rms, hw_rms]
 min_err = min(errors)
-
 
 #print("Nonhouseholdprice:")
 
